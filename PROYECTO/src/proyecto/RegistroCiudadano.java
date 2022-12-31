@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,11 +22,13 @@ public class RegistroCiudadano extends javax.swing.JFrame {
 
     conexion.Conexion con = new Conexion();
     Connection cn = con.conectar();
+
     /**
-     * Creates new form Registro
+     * Creates new form RegistroCiudadano
      */
     public RegistroCiudadano() {
         initComponents();
+        llenarCombo();
     }
 
     /**
@@ -69,6 +72,8 @@ public class RegistroCiudadano extends javax.swing.JFrame {
         rbcorriente = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
         btregresar = new javax.swing.JButton();
+        CBbanco = new javax.swing.JComboBox<>();
+        jLabel12 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -247,6 +252,16 @@ public class RegistroCiudadano extends javax.swing.JFrame {
             }
         });
 
+        CBbanco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBbancoActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setFont(new java.awt.Font("Roboto Cn", 0, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel12.setText("BANCO:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -284,28 +299,32 @@ public class RegistroCiudadano extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtnombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(47, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtdireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                    .addComponent(jSeparator1)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtdireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING))
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(23, 23, 23)
-                                                .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel12)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(75, 75, 75)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGap(21, 21, 21)
-                                                .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtcontraR, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(rbcorriente, javax.swing.GroupLayout.Alignment.LEADING)))))
-                                .addContainerGap(39, Short.MAX_VALUE))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtcontraR, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(rbcorriente, javax.swing.GroupLayout.Alignment.LEADING)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(15, 15, 15))))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -382,7 +401,9 @@ public class RegistroCiudadano extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
                 .addGap(49, 49, 49))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
@@ -404,9 +425,13 @@ public class RegistroCiudadano extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void llenarCombo() {
+        CBbanco.addItem("Guayaquil");
+        CBbanco.addItem("Pichincha");
+        CBbanco.addItem("Pacífico");
+    }
 
-    
-    
+
     private void btregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btregistrarActionPerformed
         String cedula = txtcedula.getText();
         String nombre = txtnombre.getText();
@@ -416,34 +441,62 @@ public class RegistroCiudadano extends javax.swing.JFrame {
         String correo = txtcorreoR.getText();
         String contraseña = txtcontraR.getText();
         Date fecha = txtfecha.getDate();
+        int saldoCuenta = 0;
+        saldoCuenta = (int) (Math.random() * 1000 + 100);
+        String nombreBanco = "";
+        String tipoCuenta = "";
+        Random numero = new Random();
+        int numeroCuenta = numero.nextInt();
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat formatter = new SimpleDateFormat(pattern);
         String fechaR = formatter.format(fecha);
         System.out.println(fecha);
-        if(cedula.isEmpty()||nombre.isEmpty()||apellido.isEmpty()||direccion.isEmpty()||teléfono.isEmpty()||correo.isEmpty()||contraseña.isEmpty()||fecha == null){
-            JOptionPane.showMessageDialog(null, "DEBE COMPLETAR TODOS LOS DATOS");
-        }else if (cedula.length()!=10){
+        if (cedula.isEmpty() || nombre.isEmpty() || apellido.isEmpty() || direccion.isEmpty() || teléfono.isEmpty() || correo.isEmpty() || contraseña.isEmpty() || fecha == null) {
+            if (!rbahorro.isSelected() && !rbcorriente.isSelected()) {
+                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR UN TIPO DE CUENTA");
+            } else if (rbahorro.isSelected() && rbcorriente.isSelected()) {
+                JOptionPane.showMessageDialog(null, "DEBE SELECCIONAR SOLO UN TIPO DE CUENTA");
+            }
+            JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
+        } else if (cedula.length() != 10) {
             JOptionPane.showMessageDialog(null, "DEBE COLOCAR LA CANTIDAD DE NUMEROS CORRECTOS DE LA CEDULA");
-        }else if (teléfono.length()!=10){
+        } else if (teléfono.length() != 10) {
             JOptionPane.showMessageDialog(null, "DEBE COLOCAR LA CANTIDAD DE NUMEROS CORRECTOS DEL TELEFONO");
-        }else{
-            try{
-                String consultaUsuario = "INSERT into usuario (clave, correo) VALUES ('"+contraseña+"', '"+correo+"');";
+        } else {
+            if(rbahorro.isSelected()){
+                tipoCuenta = "Ahorro";
+            }else if (rbcorriente.isSelected()){
+                tipoCuenta = "Corriente";
+            }
+            nombreBanco = CBbanco.getSelectedItem().toString();
+            try {
+                String consultaUsuario = "INSERT into usuario (clave, correo) VALUES ('" + contraseña + "', '" + correo + "');";
                 PreparedStatement ps = cn.prepareStatement(consultaUsuario);
                 ps.executeUpdate();
                 String seleccionarID = "SELECT id_usuario FROM usuario ORDER BY id_usuario DESC LIMIT 1;";
                 ps = cn.prepareStatement(seleccionarID);
                 int idUsuario = 0;
                 ResultSet rs = ps.executeQuery();
-                if (rs.next()){
+                if (rs.next()) {
                     idUsuario = rs.getInt("id_usuario");
                 }
-                String consultaciudadano = "INSERT into ciudadano (id_usuario, cedula, nombres, apellidos, telefono, fecha_Nac, direccion) VALUES ("+idUsuario+", '"+cedula+"', '"+nombre+"', '"+apellido+"', '"+teléfono+"', '"+fechaR+"', '"+direccion+"');";
-                ps = cn.prepareStatement(consultaciudadano);
+                String seleccionarIDcuenta = "SELECT id_cuenta FROM cuenta ORDER BY id_cuenta DESC LIMIT 1;";
+                ps = cn.prepareStatement(seleccionarIDcuenta);
+                int idCuenta = 0;
+                ResultSet rs4 = ps.executeQuery();
+                if (rs4.next()) {
+                    idCuenta = rs4.getInt("id_cuenta") + 1;
+                }
+                String consultaCuenta = "INSERT into cuenta (id_cuenta, id_usuario, nro_Cuenta, tipoCuenta, nombreBanco, saldo) VALUES (" + idCuenta + ", " + idUsuario + ", '" + numeroCuenta + "', '" + tipoCuenta + "', '" + nombreBanco + "', " + saldoCuenta + ")";
+                ps = cn.prepareStatement(consultaCuenta);
                 ps.executeUpdate();
                 
+                String consultaciudadano = "INSERT into ciudadano (id_usuario, cedula, nombres, apellidos, telefono, fecha_Nac, direccion) VALUES (" + idUsuario + ", '" + cedula + "', '" + nombre + "', '" + apellido + "', '" + teléfono + "', '" + fechaR + "', '" + direccion + "');";
+                ps = cn.prepareStatement(consultaciudadano);
+                ps.executeUpdate();
+
                 JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
-            }catch(SQLException ex){
+            } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "USUARIO YA EXISTENTE", "Advertencia",
                         JOptionPane.WARNING_MESSAGE);
                 System.out.println(ex);
@@ -515,7 +568,7 @@ public class RegistroCiudadano extends javax.swing.JFrame {
 
     private void txtcorreoRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoRKeyTyped
         String correo = String.valueOf(evt.getKeyChar());
-        if(!correo.matches("[a-zA-Z ´áéíóú@_.]")){
+        if (!correo.matches("[0-9a-zA-Z ´áéíóú@_.]")) {
             evt.consume();
         }
     }//GEN-LAST:event_txtcorreoRKeyTyped
@@ -526,6 +579,10 @@ public class RegistroCiudadano extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtdireccionKeyTyped
+
+    private void CBbancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBbancoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CBbancoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -564,11 +621,13 @@ public class RegistroCiudadano extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> CBbanco;
     private javax.swing.JButton btregistrar;
     private javax.swing.JButton btregresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

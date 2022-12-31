@@ -9,7 +9,6 @@ public class Conexion {
         try{
             Class.forName("com.mysql.jdbc.Driver");
             cn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/serviciofinanciero", "root", "jmawyin");
-            System.out.println("CONECTADO");
         }catch(Exception e){
             System.out.println("ERROR DE CONEXION BD "+e);
         }

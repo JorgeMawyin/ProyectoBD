@@ -9,6 +9,9 @@ import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +22,7 @@ public class LogIn extends javax.swing.JFrame {
 
     conexion.Conexion con = new Conexion();
     Connection cn = con.conectar();
-
+    String correo="";
     /**
      * Creates new form LogIn
      */
@@ -31,9 +34,16 @@ public class LogIn extends javax.swing.JFrame {
         int resultado = 0;
         String pass = String.valueOf(txtcontraI.getPassword());
         String correo = String.valueOf(txtcorreoI.getText());
+        Usuario.correo=correo;
+        String nroCuenta = "";
+        String saldo = "";
+        String tipoCuenta = "";
         String SQL = "SELECT * FROM usuario WHERE correo='" + correo + "' and clave='" + pass + "';";
         String SQLCONTRASEÑA = "SELECT * FROM usuario WHERE clave='" + pass + "';";
         String SQLUSUARIO = "SELECT * FROM usuario WHERE correo='" + correo + "';";
+        String SQLcuenta = "SELECT C.nro_Cuenta, C.saldo, C.tipoCuenta, C.nombreBanco, C.id_usuario, U.correo FROM cuenta C JOIN usuario U ON C.id_usuario = U.id_usuario WHERE U.correo = '"+correo+"';";
+        
+        
         try {
             PreparedStatement ps1 = cn.prepareStatement(SQL);
             ResultSet rs1 = ps1.executeQuery();
@@ -41,21 +51,97 @@ public class LogIn extends javax.swing.JFrame {
             ResultSet rs2 = ps2.executeQuery();
             PreparedStatement ps3 = cn.prepareStatement(SQLUSUARIO);
             ResultSet rs3 = ps3.executeQuery();
-
+            PreparedStatement ps4;
+            ps4 = cn.prepareStatement(SQLcuenta);
+            ResultSet rs4 = ps4.executeQuery();
+            if(rs4.next()){
+                Usuario.nroCuenta = rs4.getString("nro_Cuenta");
+                Usuario.saldo = rs4.getFloat("saldo");
+                Usuario.tipoCuenta = rs4.getString("tipoCuenta");
+                Usuario.banco = rs4.getString("nombreBanco");
+                Usuario.idUsuario = rs4.getInt("id_usuario");
+            }
+            
             if (!rs3.next()) {
                 JOptionPane.showMessageDialog(null, "ERROR DE ACCESO, USUARIO NO REGISTRADO");
             } else if (!rs2.next()) {
                 JOptionPane.showMessageDialog(null, "ERROR DE ACCESO, CONTRASEÑA INCORRECTA");
             } else {
                 JOptionPane.showMessageDialog(null, "USUARIO IDENTIFICADO");
-                SGUIENTE xd = new SGUIENTE();
-                xd.setVisible(true);
+                
+                CuentaCiudadano cuenta = new CuentaCiudadano();
+                cuenta.setVisible(true);
                 this.setVisible(false);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERROR " + e.getMessage());
         }
     }
+
+    public String returnCorreo(){
+        return Usuario.correo;
+    }
+    
+    public int returnIdUsuario(){
+        return Usuario.idUsuario;
+    }
+    
+    public String returnNroCuenta(){
+        String nroCuenta = "";
+        nroCuenta = Usuario.nroCuenta;
+        return nroCuenta;
+    }
+    
+    public String returnSaldo(){
+        String saldo = "";
+        saldo = String.valueOf(Usuario.saldo);
+        return saldo;
+    }
+    
+    public String returnTipoCuenta(){
+        String tipoCuenta = "";
+        tipoCuenta = Usuario.tipoCuenta;
+        return tipoCuenta;
+    }
+    
+    public String returnBanco(){
+        String banco = "";
+        banco = Usuario.banco;
+        return banco;
+    }
+    
+    public String returnNombres() {
+        String nombres = "";
+        String consulta = "SELECT C.nombres FROM ciudadano C JOIN usuario U ON c.id_usuario = U.id_usuario WHERE U.correo = '" + Usuario.correo + "';";
+        try {
+            PreparedStatement ps1 = cn.prepareStatement(consulta);
+            ResultSet rs = ps1.executeQuery();
+            if (rs.next()) {
+                nombres = rs.getString("nombres");
+                return nombres;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return nombres;
+    }
+
+    public String returnApellidos() {
+        String apellidos = "";
+        String consulta = "SELECT C.apellidos FROM ciudadano C JOIN usuario U ON c.id_usuario = U.id_usuario WHERE U.correo = '" + Usuario.correo + "';";
+        try {
+            PreparedStatement ps1 = cn.prepareStatement(consulta);
+            ResultSet rs = ps1.executeQuery();
+            if (rs.next()) {
+                apellidos = rs.getString("apellidos");
+                return apellidos;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return apellidos;
+    }
+ 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -101,10 +187,20 @@ public class LogIn extends javax.swing.JFrame {
         txtcorreoI.setText("Ingrese su correo");
         txtcorreoI.setToolTipText("");
         txtcorreoI.setBorder(null);
+        txtcorreoI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcorreoIKeyTyped(evt);
+            }
+        });
 
         txtcontraI.setForeground(new java.awt.Color(102, 102, 102));
         txtcontraI.setText("jPasswordField1");
         txtcontraI.setBorder(null);
+        txtcontraI.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcontraIKeyTyped(evt);
+            }
+        });
 
         btingresar.setBackground(new java.awt.Color(27, 122, 190));
         btingresar.setFont(new java.awt.Font("Roboto Cn", 0, 14)); // NOI18N
@@ -147,9 +243,8 @@ public class LogIn extends javax.swing.JFrame {
                                 .addComponent(btingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(5, 5, 5))
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSeparator1)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                                 .addComponent(txtcorreoI)
@@ -204,6 +299,17 @@ public class LogIn extends javax.swing.JFrame {
         inicio.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btregresarActionPerformed
+
+    private void txtcorreoIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoIKeyTyped
+        String correo = String.valueOf(evt.getKeyChar());
+        if (!correo.matches("[0-9a-zA-Z ´áéíóú@_.]")) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtcorreoIKeyTyped
+
+    private void txtcontraIKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraIKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcontraIKeyTyped
 
     /**
      * @param args the command line arguments
