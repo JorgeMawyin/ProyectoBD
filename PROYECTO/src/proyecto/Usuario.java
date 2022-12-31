@@ -16,7 +16,7 @@ import java.util.Random;
 public class Usuario {
     public static String correo;
     public static String nroCuenta;
-    public static Float saldo;
+    public static double saldo;
     public static String usuario;
     public static String tipoCuenta;
     public static String banco;
@@ -24,5 +24,6 @@ public class Usuario {
     public static double cuota;
     public static double interes;
     public static double capital;
+    public static int idprestamo;
 
 }

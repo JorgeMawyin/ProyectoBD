@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,7 +30,7 @@ public class CuentaCiudadano extends javax.swing.JFrame {
      */
     conexion.Conexion con = new Conexion();
     Connection cn = con.conectar();
-
+    DecimalFormat df = new DecimalFormat("#.00");
     public CuentaCiudadano() {
         String nombres = lg.returnNombres();
         String apellidos = lg.returnApellidos();
@@ -70,10 +71,11 @@ public class CuentaCiudadano extends javax.swing.JFrame {
         txtestado = new javax.swing.JTextField();
         txtsaldo = new javax.swing.JTextField();
         txtcorreo = new javax.swing.JTextField();
-        txtcuenta = new javax.swing.JTextField();
         labelBanco = new javax.swing.JLabel();
+        txtcuenta = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         BTpagar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -152,7 +154,7 @@ public class CuentaCiudadano extends javax.swing.JFrame {
 
             },
             new String [] {
-                "SISTEMA", "TASA INTERÉS", "CAPITAL", "CAPITAL VENCIDO", "VENCIMIENTO"
+                "SISTEMA", "TASA INTERÉS", "CAPITAL", "CAPITAL VENCIDO", "VENCIMIENTO", "CUOTA"
             }
         ));
         jScrollPane2.setViewportView(JTprestamo);
@@ -276,18 +278,20 @@ public class CuentaCiudadano extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        labelBanco.setFont(new java.awt.Font("Roboto Cn", 0, 12)); // NOI18N
+        labelBanco.setForeground(new java.awt.Color(0, 0, 0));
+        labelBanco.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
         txtcuenta.setBackground(new java.awt.Color(204, 204, 204));
         txtcuenta.setFont(new java.awt.Font("Roboto Cn", 0, 12)); // NOI18N
         txtcuenta.setForeground(new java.awt.Color(0, 0, 0));
+        txtcuenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtcuenta.setBorder(null);
         txtcuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtcuentaActionPerformed(evt);
             }
         });
-
-        labelBanco.setFont(new java.awt.Font("Roboto Cn", 0, 12)); // NOI18N
-        labelBanco.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setBackground(new java.awt.Color(0, 204, 153));
         jButton1.setFont(new java.awt.Font("Roboto Cn", 0, 12)); // NOI18N
@@ -311,16 +315,23 @@ public class CuentaCiudadano extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setBackground(new java.awt.Color(0, 204, 153));
+        jButton2.setFont(new java.awt.Font("Roboto Cn", 0, 12)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("RECARGAR SALDO");
+        jButton2.setBorder(null);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labelBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(308, 308, 308))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,37 +339,35 @@ public class CuentaCiudadano extends javax.swing.JFrame {
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(217, 217, 217)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(labelBanco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(342, 342, 342)
-                        .addComponent(BTpagar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(343, 343, 343)
+                        .addComponent(BTpagar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtcuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 799, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(labelBanco, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(322, 322, 322))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BTpagar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtcuenta, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(BTpagar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -404,12 +413,19 @@ public class CuentaCiudadano extends javax.swing.JFrame {
     ArrayList<String> cuenta = new ArrayList();
 
     public void llenarCuenta() {
+        String tipoCuenta = "x";
+        String banco = "x";
+        if(lg.returnTipoCuenta()!= null || lg.returnBanco()!= null){
+            tipoCuenta = lg.returnTipoCuenta();
+            banco = lg.returnBanco();
+        }
         String numero = lg.returnNroCuenta();
         String estado = "Activo";
-        String saldo = lg.returnSaldo();
-        String tipoCuenta = lg.returnTipoCuenta();
+        String saldo = "$"+df.format(Float.valueOf(lg.returnSaldo()));
+        Usuario.saldo = Float.valueOf(lg.returnSaldo());
+        
         String correo = lg.returnCorreo();
-        String banco = lg.returnBanco();
+        
         txtcuenta.setText("CUENTA TIPO: " + tipoCuenta.toUpperCase());
         txtnrocuenta.setText(numero);
         txtestado.setText(estado);
@@ -420,18 +436,21 @@ public class CuentaCiudadano extends javax.swing.JFrame {
 
     public void llenarPrestamos() {
         int idusuario = lg.returnIdUsuario();
-        String SQL = "SELECT P.sistema_A, P.tasa_int, P.total_pagar, P.fecha_final, SUM(C.Monto_Pagar) AS Cvencido FROM prestamo P JOIN cuota C ON P.id_prestamo = C.id_prestamo JOIN cuota_pagada CP ON CP.id_cuota = C.id_cuota WHERE P.id_usuario = " + idusuario + " GROUP BY CP.id_cuota;";
+        Usuario.idUsuario = lg.returnIdUsuario();
+        String SQL = "SELECT P.id_prestamo, P.sistema_A, P.tasa_int, P.total_pagar, P.fecha_final, P.valor_cuota, SUM(C.Monto_Pagar) AS Cvencido FROM prestamo P JOIN cuota C ON P.id_prestamo = C.id_prestamo JOIN cuota_pagada CP ON CP.id_cuota = C.id_cuota WHERE P.id_usuario = " + idusuario + " GROUP BY CP.id_cuota ORDER BY CP.id_cuota;";
 
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(SQL);
             while (rs.next()) {
+                Usuario.idprestamo = rs.getInt("id_prestamo");
                 String sistema = rs.getString("sistema_A");
-                String tasaInteres = rs.getFloat("tasa_int") + "%";
+                String tasaInteres = String.valueOf(df.format(Float.valueOf(rs.getString("tasa_int"))))+ "%";
                 String capital = "$" + rs.getFloat("total_pagar");
-                String capitalVencido = "$" + rs.getFloat("Cvencido");
+                String capitalVencido = "$" + String.valueOf(df.format(Float.valueOf(rs.getString("Cvencido"))));
                 Date vencimiento = rs.getDate("fecha_final");
-                Object[] row = {sistema, tasaInteres, capital, capitalVencido, vencimiento};
+                String cuota = "$"+String.valueOf(df.format(Float.valueOf(rs.getString("valor_cuota"))));
+                Object[] row = {sistema, tasaInteres, capital, capitalVencido, vencimiento, cuota};
                 DefaultTableModel model = (DefaultTableModel) JTprestamo.getModel();
                 model.addRow(row);
 
@@ -486,7 +505,7 @@ public class CuentaCiudadano extends javax.swing.JFrame {
 
     private void BTpagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BTpagarActionPerformed
         int fila = JTprestamo.getSelectedRow();
-        if(fila >= 0){
+        if(fila >= 0){ 
             pagarCuota pagar = new pagarCuota();
             pagar.setVisible(true);
             this.setVisible(false);
@@ -495,6 +514,23 @@ public class CuentaCiudadano extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BTpagarActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        DepositarSaldo rs = new DepositarSaldo();
+        rs.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+    public int returnIDusuario(){
+        return Usuario.idUsuario;
+    }
+    
+    public double returnSaldo(){
+        return Usuario.saldo;
+    }
+    
+    public int returnIdprestamo(){
+        return Usuario.idprestamo;
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -542,6 +578,7 @@ public class CuentaCiudadano extends javax.swing.JFrame {
     private javax.swing.JButton BTpagar;
     private javax.swing.JTable JTprestamo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

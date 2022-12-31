@@ -141,7 +141,7 @@ public class MenuRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnciudadanoActionPerformed
 
     private void btinstitucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btinstitucionActionPerformed
-        RegistroInstitucion institucion = new RegistroInstitucion();
+        SeleccionInstitucion institucion = new SeleccionInstitucion();
         institucion.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btinstitucionActionPerformed

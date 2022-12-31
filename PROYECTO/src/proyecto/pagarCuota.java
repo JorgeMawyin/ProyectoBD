@@ -4,7 +4,14 @@
  */
 package proyecto;
 
+import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,18 +29,36 @@ public class pagarCuota extends javax.swing.JFrame {
         llenarTextField();
         txtusuario.setText(nombres + " " + apellidos);
     }
-    
+
+    conexion.Conexion con = new Conexion();
+    Connection cn = con.conectar();
     LogIn lg = new LogIn();
     Solicitar s = new Solicitar();
     DecimalFormat df = new DecimalFormat("#.00");
-    FinalSolicitudFrances fs = new FinalSolicitudFrances();
-    
-    public void llenarTextField(){
-        JTinteres.setText("$"+df.format(fs.returnInteres()));
-        JTcapital.setText("$"+df.format(fs.returnCapital()));
-        JTpagar.setText("$"+df.format(s.monto()));
+    CuentaCiudadano cs = new CuentaCiudadano();
+
+    public void llenarTextField() {
+        int idusuario = cs.returnIDusuario();
+        String SQL = "SELECT P.sistema_A, P.tasa_int, P.total_pagar, P.fecha_final, P.valor_cuota, SUM(C.Monto_Pagar) AS Cvencido FROM prestamo P JOIN cuota C ON P.id_prestamo = C.id_prestamo JOIN cuota_pagada CP ON CP.id_cuota = C.id_cuota WHERE P.id_usuario = " + idusuario + " GROUP BY CP.id_cuota;";
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(SQL);
+            while (rs.next()) {
+                String tasaInteres = rs.getFloat("tasa_int") + "%";
+                String capital = "$" + rs.getFloat("total_pagar");
+                String cuota = "$" + rs.getFloat("valor_cuota");
+                Usuario.cuota = rs.getFloat("valor_cuota");
+                JTinteres.setText(" " + tasaInteres);
+                JTcapital.setText(" " + capital);
+                JTpagar.setText(" " + cuota);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,9 +206,6 @@ public class pagarCuota extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(333, 333, 333)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -197,7 +219,10 @@ public class pagarCuota extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(JTpagar)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 715, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(334, 334, 334)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -222,9 +247,9 @@ public class pagarCuota extends javax.swing.JFrame {
                 .addComponent(JTpagar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,9 +282,38 @@ public class pagarCuota extends javax.swing.JFrame {
         log.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jLabel3MouseClicked
+    FinalSolicitudFrances fs = new FinalSolicitudFrances();
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        double saldo = cs.returnSaldo();
+        String fechaActual = fs.fechaActual();
+        if (saldo >= Usuario.cuota) {
 
+            int idprestamo = cs.returnIdprestamo();
+            int idusuario = cs.returnIDusuario();
+            try {
+                String SQL = "SELECT C.id_cuota FROM cuota C JOIN prestamo P ON C.id_prestamo = P.id_prestamo WHERE P.id_prestamo = " + idprestamo + ";";
+                PreparedStatement ps = cn.prepareStatement(SQL);
+                int idCuota = 0;
+                ResultSet rs = ps.executeQuery(SQL);
+                if (rs.next()) {
+                    idCuota = rs.getInt("id_cuota");
+                }
+                String SQLCUOTAP = "INSERT INTO cuota_pagada (id_cuota, id_usuario, fecha_pago) VALUES(" + idCuota + ", " + idusuario + ", DATE('" + fechaActual + "'));";
+                ps = cn.prepareStatement(SQLCUOTAP);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(null, "PAGO REALIZADO CON ÉXITO");
+                
+                
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+
+        }else{
+            JOptionPane.showMessageDialog(null, "USTED NO CUENTA CON SALDO SUFICIENTE PARA REALIZAR EL PAGO");
+        }
+        cs.setVisible(true);
+        this.setVisible(false);    
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

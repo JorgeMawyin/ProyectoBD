@@ -47,11 +47,8 @@ public class RegistroInstitucion extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         txtruc = new javax.swing.JTextField();
-        txtcontraR = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
         btregistrar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtdireccion = new javax.swing.JTextField();
@@ -62,9 +59,6 @@ public class RegistroInstitucion extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txttelefono = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
-        jLabel9 = new javax.swing.JLabel();
-        txtcorreoR = new javax.swing.JTextField();
-        jSeparator7 = new javax.swing.JSeparator();
         jSeparator8 = new javax.swing.JSeparator();
         txtpropietario = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -93,12 +87,8 @@ public class RegistroInstitucion extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("DIRECCIÓN");
 
-        jLabel4.setFont(new java.awt.Font("Roboto Cn", 0, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel4.setText("CONTRASEÑA");
-
         txtruc.setForeground(new java.awt.Color(102, 102, 102));
-        txtruc.setText("Ingrese su cédula");
+        txtruc.setText("Ingrese su RUC");
         txtruc.setToolTipText("");
         txtruc.setBorder(null);
         txtruc.addActionListener(new java.awt.event.ActionListener() {
@@ -111,10 +101,6 @@ public class RegistroInstitucion extends javax.swing.JFrame {
                 txtrucKeyTyped(evt);
             }
         });
-
-        txtcontraR.setForeground(new java.awt.Color(102, 102, 102));
-        txtcontraR.setText("jPasswordField1");
-        txtcontraR.setBorder(null);
 
         btregistrar.setBackground(new java.awt.Color(27, 122, 190));
         btregistrar.setFont(new java.awt.Font("Roboto Cn", 0, 14)); // NOI18N
@@ -185,27 +171,8 @@ public class RegistroInstitucion extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Roboto Cn", 0, 18)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("CORREO");
-
-        txtcorreoR.setForeground(new java.awt.Color(102, 102, 102));
-        txtcorreoR.setText("Ingrese su correo");
-        txtcorreoR.setToolTipText("");
-        txtcorreoR.setBorder(null);
-        txtcorreoR.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcorreoRActionPerformed(evt);
-            }
-        });
-        txtcorreoR.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcorreoRKeyTyped(evt);
-            }
-        });
-
         txtpropietario.setForeground(new java.awt.Color(102, 102, 102));
-        txtpropietario.setText("Ingrese su correo");
+        txtpropietario.setText("Ingrese el nombre del propietario");
         txtpropietario.setToolTipText("");
         txtpropietario.setBorder(null);
         txtpropietario.addActionListener(new java.awt.event.ActionListener() {
@@ -305,53 +272,37 @@ public class RegistroInstitucion extends javax.swing.JFrame {
                                                 .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(jLabel11)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtcorreoR)
-                                                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(txtpropietario)
-                                                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jLabel10))
-                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtcontraR, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txtpropietario)
+                                            .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel10)
+                                            .addComponent(jLabel7)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(rbahorro)
+                                                .addGap(30, 30, 30)
+                                                .addComponent(rbcorriente))
+                                            .addComponent(jLabel12)
+                                            .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addComponent(txtruc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
-                                                .addGap(74, 74, 74)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                        .addComponent(txtdireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-                                                        .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(jLabel7)
-                                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                                        .addGap(162, 162, 162)
-                                                        .addComponent(rbahorro)))
-                                                .addGap(44, 44, 44)
-                                                .addComponent(rbcorriente)))
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(txtruc, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
+                                        .addGap(74, 74, 74)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtdireccion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                                                .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)))
                                         .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap(40, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(68, 68, 68)
                                 .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(14, 14, 14))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(181, 181, 181)
                         .addComponent(jLabel2)
@@ -400,41 +351,29 @@ public class RegistroInstitucion extends javax.swing.JFrame {
                         .addComponent(txtpropietario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel9)
-                        .addGap(5, 5, 5)
-                        .addComponent(txtcorreoR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(rbahorro)
+                            .addComponent(rbcorriente))
+                        .addGap(19, 19, 19)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtcontraR, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16))
-                            .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(2, 2, 2)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(txttipo, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(16, 16, 16))
+                        .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbahorro)
-                    .addComponent(rbcorriente)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(CBbanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btregistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btregresar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(69, 69, 69))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
@@ -465,8 +404,6 @@ public class RegistroInstitucion extends javax.swing.JFrame {
         String direccionR = txtdireccion.getText();
         String teléfonoR = txttelefono.getText();
         String propietarioR = txtpropietario.getText();
-        String correoR = txtcorreoR.getText();
-        String contraseñaR = txtcontraR.getText();
         String tipoR = txttipo.getText();
         String tipoCuenta = "";
         String nombreBanco = "";
@@ -474,7 +411,7 @@ public class RegistroInstitucion extends javax.swing.JFrame {
         int numeroCuenta = numero.nextInt();
         int saldoCuenta = 0;
         saldoCuenta = (int) (Math.random() * 1000 + 100);
-        if(RUC.isEmpty()||nombreR.isEmpty()||direccionR.isEmpty()||teléfonoR.isEmpty()||propietarioR.isEmpty()||correoR.isEmpty()||contraseñaR.isEmpty()||tipoR.isEmpty()){
+        if(RUC.isEmpty()||nombreR.isEmpty()||direccionR.isEmpty()||teléfonoR.isEmpty()||propietarioR.isEmpty()||tipoR.isEmpty()){
             JOptionPane.showMessageDialog(null, "DEBE COMPLETAR TODOS LOS DATOS");
         }else if (RUC.length()!=13){
             JOptionPane.showMessageDialog(null, "DEBE COLOCAR LA CANTIDAD DE NUMEROS CORRECTOS DEL RUC");
@@ -491,26 +428,7 @@ public class RegistroInstitucion extends javax.swing.JFrame {
                 String consultaInstitucion = "INSERT into institucion (RUC, nombre, direccion, tipo_Inst, telefono, propietario) VALUES ('"+RUC+"', '"+nombreR+"', '"+direccionR+"', '"+tipoR+"', '"+teléfonoR+"', '"+propietarioR+"');";
                 PreparedStatement ps = cn.prepareStatement(consultaInstitucion);
                 ps.executeUpdate();
-                String consultaUsuario = "INSERT into usuario (clave, correo) VALUES ('"+contraseñaR+"', '"+correoR+"');";
-                ps = cn.prepareStatement(consultaUsuario);
-                ps.executeUpdate();
-                String seleccionarID = "SELECT id_usuario FROM usuario ORDER BY id_usuario DESC LIMIT 1;";
-                ps = cn.prepareStatement(seleccionarID);
-                int idUsuario = 0;
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()) {
-                    idUsuario = rs.getInt("id_usuario");
-                }
-                String seleccionarIDcuenta = "SELECT id_cuenta FROM cuenta ORDER BY id_cuenta DESC LIMIT 1;";
-                ps = cn.prepareStatement(seleccionarIDcuenta);
-                int idCuenta = 0;
-                ResultSet rs4 = ps.executeQuery();
-                if (rs4.next()) {
-                    idCuenta = rs4.getInt("id_cuenta") + 1;
-                }
-                String consultaCuenta = "INSERT into cuenta (id_cuenta, id_usuario, nro_Cuenta, tipoCuenta, nombreBanco, saldo) VALUES (" + idCuenta + ", " + idUsuario + ", '" + numeroCuenta + "', '" + tipoCuenta + "', '" + nombreBanco + "', " + saldoCuenta + ")";
-                ps = cn.prepareStatement(consultaCuenta);
-                ps.executeUpdate();
+                
                 JOptionPane.showMessageDialog(null, "DATOS GUARDADOS CORRECTAMENTE");
             }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "USUARIO YA EXISTENTE", "Advertencia",
@@ -518,6 +436,9 @@ public class RegistroInstitucion extends javax.swing.JFrame {
                 System.out.println(ex);
             }
         }
+        RegistrarRepresentante registrar = new RegistrarRepresentante();
+        registrar.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btregistrarActionPerformed
 
     private void txtdireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtdireccionActionPerformed
@@ -531,10 +452,6 @@ public class RegistroInstitucion extends javax.swing.JFrame {
     private void txttelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txttelefonoActionPerformed
-
-    private void txtcorreoRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorreoRActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcorreoRActionPerformed
 
     private void txtpropietarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpropietarioActionPerformed
         // TODO add your handling code here:
@@ -573,13 +490,6 @@ public class RegistroInstitucion extends javax.swing.JFrame {
             evt.consume();
         }
     }//GEN-LAST:event_txtpropietarioKeyTyped
-
-    private void txtcorreoRKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoRKeyTyped
-        String correo = String.valueOf(evt.getKeyChar());
-        if(!correo.matches("[0-9a-zA-Z ´áéíóú@_.]")){
-            evt.consume();
-        }
-    }//GEN-LAST:event_txtcorreoRKeyTyped
 
     private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
         String direccion = String.valueOf(evt.getKeyChar());
@@ -652,25 +562,19 @@ public class RegistroInstitucion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
     private javax.swing.JRadioButton rbahorro;
     private javax.swing.JRadioButton rbcorriente;
-    private javax.swing.JPasswordField txtcontraR;
-    private javax.swing.JTextField txtcorreoR;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtnombre;
     private javax.swing.JTextField txtpropietario;

@@ -29,7 +29,6 @@ public class Solicitar extends javax.swing.JFrame {
     public void llenarCombo() {
         CBsistema.addItem("");
         CBsistema.addItem("Francés");
-        CBsistema.addItem("Aleman");
     }
 
     public void ValidarPrestamo() {
