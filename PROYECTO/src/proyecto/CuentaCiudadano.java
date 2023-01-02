@@ -445,7 +445,7 @@ public class CuentaCiudadano extends javax.swing.JFrame {
             while (rs.next()) {
                 Usuario.idprestamo = rs.getInt("id_prestamo");
                 String sistema = rs.getString("sistema_A");
-                String tasaInteres = String.valueOf(df.format(Float.valueOf(rs.getString("tasa_int"))))+ "%";
+                String tasaInteres = String.valueOf(Float.valueOf(rs.getString("tasa_int")))+ "%";
                 String capital = "$" + rs.getFloat("total_pagar");
                 String capitalVencido = "$" + String.valueOf(df.format(Float.valueOf(rs.getString("Cvencido"))));
                 Date vencimiento = rs.getDate("fecha_final");

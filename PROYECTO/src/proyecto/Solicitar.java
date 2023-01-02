@@ -4,6 +4,11 @@
  */
 package proyecto;
 
+import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import javax.swing.JOptionPane;
 
@@ -16,6 +21,9 @@ public class Solicitar extends javax.swing.JFrame {
     /**
      * Creates new form Solicitar
      */
+    conexion.Conexion con = new Conexion();
+    Connection cn = con.conectar();
+    
     public Solicitar() {
         String nombres = lg.returnNombres();
         String apellidos = lg.returnApellidos();
@@ -30,7 +38,9 @@ public class Solicitar extends javax.swing.JFrame {
         CBsistema.addItem("");
         CBsistema.addItem("Francés");
     }
-
+    
+    CuentaCiudadano cs = new CuentaCiudadano();
+    
     public void ValidarPrestamo() {
         double monto = Float.valueOf(txtmonto.getText());
         Usuario.cuota = monto;
@@ -38,6 +48,7 @@ public class Solicitar extends javax.swing.JFrame {
         double ingreso = Float.valueOf(txtingreso.getText());
         double egreso = Float.valueOf(txtegreso.getText());
         double tasa_interes = 0.014;
+        int idusuario = cs.returnIDusuario();
         if (txtmonto.getText().isEmpty() || sistema.isEmpty() || txtingreso.getText().isEmpty() || txtegreso.getText().isEmpty() || sistema.isEmpty()) {
             JOptionPane.showMessageDialog(null, "DEBE LLENAR TODOS LOS CAMPOS");
         }
@@ -49,6 +60,25 @@ public class Solicitar extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "USTED NO CUMPLE LOS REQUERIMIENTOS PARA ACCEDER A UN PRÉSTAMO");
             }
+        }
+        
+        try{
+            String SQLidciudadano = "SELECT id_ciudadano FROM ciudadano WHERE id_usuario = "+idusuario+";";
+            PreparedStatement ps = cn.prepareStatement(SQLidciudadano);
+            int idciudadano = 0;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                idciudadano = rs.getInt("id_ciudadano");
+            }
+            String SQL = "UPDATE ciudadano SET ingresos ="+ingreso+" WHERE id_ciudadano = "+idciudadano+";";
+            ps = cn.prepareStatement(SQL);
+            ps.executeUpdate();
+            String SQL2 = "UPDATE ciudadano SET egresos ="+egreso+" WHERE id_ciudadano = "+idciudadano+";";
+            ps = cn.prepareStatement(SQL2);
+            ps.executeUpdate();
+            
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "ERROR: "+ex);
         }
     }
     public double TasaInteres(){
